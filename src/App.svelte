@@ -1,30 +1,45 @@
 <script>
-	export let name;
+	// export let name;
+	let mass ;
 </script>
 
 <main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
+	<h1>Расчет калорий</h1>
+	<hr>
+	<label>Вес
+		<input bind:value={mass} placeholder="введите вес">
+	</label>
+
 </main>
 
 <style>
 	main {
-		text-align: center;
+		text-align: left;
+		font-family:'Courier New', Courier, monospace;
 		padding: 1em;
 		max-width: 240px;
 		margin: 0 auto;
 	}
 
 	h1 {
-		color: #ff3e00;
+		color: #414042;
 		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
+		font-size: 3em;
+		font-weight: 60;
+		margin: 1.5rem;
 	}
 
 	@media (min-width: 640px) {
 		main {
 			max-width: none;
 		}
+	}
+	:global(html) {
+		background-color:#E6E7E8;
+	}
+
+	hr {
+		color: #D1D3D4;
+		margin: 1.5rem;
 	}
 </style>
