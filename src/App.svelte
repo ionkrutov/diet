@@ -1,15 +1,8 @@
 <script>
-	// export let name;
-	let mass;
-	let gender;
-	let amr;
 	let genders = [
 		{id: 0, text: "муж"},
 		{id: 1, text: "жен"},
 	]
-	let age;
-	let activity;
-	let height;
 	let activities = [
 		{id: 0, text: "Сидячий образ жизн", k: 1.2},
 		{id: 1, text: "Умеренная активность", k: 1.375},
@@ -17,6 +10,13 @@
 		{id: 3, text: "Повышенная активность", k: 1.725},
 		{id: 0, text: "Профессиональные занятия спортом", k: 1.9},
 	]
+	let mass;
+	let gender = genders[0];
+	let amr;
+	let age;
+	let activity = activities[0];
+	let height;
+	
 
 	function checkAge() {
 		if (age > 80){
@@ -36,7 +36,16 @@
 		return  bmr * activity.k
 	}
 
-	$: amr = 10 * mass + 6.25 * height - 5 * age
+	$: {
+		let bmr = 10 * mass + 6.25 * height - 5 * age
+		if (gender.id === 0) {
+			bmr += 5
+		} else {
+			bmr -= 161
+		}
+		amr = Math.floor(bmr * activity.k, 1)
+		console.log(mass)
+	}
 
 </script>
 
@@ -72,9 +81,10 @@
 				{/each}
 			</select>
 		</form>
-		{#if !amr.value > 0}
-			<h1>Callories = {amr}</h1>
+		{#if !isNaN(amr) && mass && age && height}
+			<h1>Калории = {amr}</h1>
 		{/if}
+		
 		
 	</div>
 	
@@ -120,6 +130,5 @@
 		display: grid;
 		grid-template-columns: 20% 70%;
 		grid-column-gap: 10px;
-		background-color: darkgray;
 	}
 </style>
